@@ -6,7 +6,7 @@ import Inventario.Amortiguador;
 import java.util.Scanner;
 
 
-public class Main {
+public class Lorenzo_Aguilar_Sango_Udla_Inventario_Mecanico {
 
      private static Scanner scanner=new Scanner(System.in);
      private static Inventario inventario=new Inventario();
