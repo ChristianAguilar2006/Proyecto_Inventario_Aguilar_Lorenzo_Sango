@@ -50,7 +50,7 @@ public class Inventario  {
     }
 
     public void reabastecerProducto(String nombreP,int cantidad,String fecha) {
-    Scanner scanner=new Scanner(System.in);
+
       for (Producto producto:productos){
             if (producto.getNombre().equalsIgnoreCase(nombreP)){
                 if ((cantidad*producto.getPrecio())>this.presupuestoInicial){
@@ -59,28 +59,51 @@ public class Inventario  {
                 }
                 System.out.println("PRODUCTO REABASTECIDO");
                 producto.reabastecer(cantidad,fecha);
-
+                this.presupuestoInicial=this.presupuestoInicial-(cantidad*producto.getPrecio());
 
             }
         }
     }
     public void editarProducto(String nombre){
-         Scanner scanner=new Scanner(System.in);
-        for (Producto producto: productos){
-            if (producto.getNombre().equalsIgnoreCase(nombre)){
-                System.out.println("PRODUCTO ENCONTRADO");
+        Scanner scanner = new Scanner(System.in);
+
+        for (Producto p : productos){
+            if (p.getNombre().equalsIgnoreCase(nombre)){
+
+                double costoAnterior = p.getCantidad() * p.getPrecio();
                 System.out.println("INGRESE EL NUEVO NOMBRE");
-                producto.setNombre(scanner.nextLine());
-                System.out.println("INGRESE LA CANTIDAD");
-                producto.setCantidad(scanner.nextInt());
+                String nuevoNombre = scanner.nextLine();
+
+                System.out.println("INGRESE LA NUEVA CANTIDAD");
+                int nuevaCantidad = scanner.nextInt();
                 scanner.nextLine();
+
                 System.out.println("INGRESE EL NUEVO PRECIO");
-                producto.setPrecio(scanner.nextDouble());
-                System.out.println("EDITADO CORRECTAMENTE");
-                System.out.println("*********");
-                producto.descripcion();
+                double nuevoPrecio = scanner.nextDouble();
+                scanner.nextLine();
+
+                double costoNuevo = nuevaCantidad * nuevoPrecio;
+                double diferencia = costoNuevo - costoAnterior;
+
+                if (diferencia > presupuestoInicial){
+                    System.out.println("NO TIENE PRESUPUESTO");
+                    return;
+                }
+
+                p.setNombre(nuevoNombre);
+                p.setCantidad(nuevaCantidad);
+                p.setPrecio(nuevoPrecio);
+                presupuestoInicial -= diferencia;
+
+                System.out.println("EDITADO");
+                System.out.println("****");
+                p.descripcion();
+                System.out.println("****");
+                return;
             }
         }
+
+        System.out.println("NO ENCONTRADO");
     }
 
     public void eliminar(String eliminar) {
@@ -103,16 +126,15 @@ public class Inventario  {
 
         for (Producto producto:productos){
             if (producto.getNombre().equalsIgnoreCase(nombre)){
-                var precioFinal=producto.getPrecio()*cantidad;
+                if (producto.getCantidad() < cantidad) {
+                    System.out.println("NO HAY STOCK SUFICIENTE");
+                    return;
+                }
                 producto.despacharProdcutos(cantidad);
+                System.out.println("PRODUCTO DESPACHADO");
             }
         }
     }
-
-
-
-
-
 
 
 }

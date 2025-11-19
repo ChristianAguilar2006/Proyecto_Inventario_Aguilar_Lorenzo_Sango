@@ -1,4 +1,4 @@
-package Main;
+package Lorenzo_Aguilar_Sango_Udla_Inventario_Mecanico;
 import Inventario.Inventario;
 import Inventario.Freno;
 import Inventario.Llanta;
@@ -6,7 +6,7 @@ import Inventario.Amortiguador;
 import java.util.Scanner;
 
 
-public class Lorenzo_Aguilar_Sango_Udla_Inventario_Mecanico {
+public class Main {
 
      private static Scanner scanner=new Scanner(System.in);
      private static Inventario inventario=new Inventario();
