@@ -1,8 +1,8 @@
 package Lorenzo_Aguilar_Sango_Udla_Inventario_Mecanico;
 import Inventario.Inventario;
-import Inventario.Freno;
-import Inventario.Llanta;
-import Inventario.Amortiguador;
+import Inventario.NoPerecible;
+import Inventario.Perecible;
+
 import java.util.Scanner;
 
 
@@ -49,6 +49,7 @@ public class Main {
         }
     }
 
+
     class FuncionesDelMain{
 
         private static int menu(){
@@ -66,14 +67,13 @@ public class Main {
         }
         private static void ingresarPresupuesto(){
             System.out.println("INGRESE EL PRESUPUESTO");
-            inventario.setPresupuestoInicial(scanner.nextDouble());
+            inventario.setPresupuesto(scanner.nextDouble());
         }
 
         private static void agregarProducto(){
             System.out.println("QUE QUIERE AGREGAR: ");
-            System.out.println("1) FRENOS");
-            System.out.println("2) LLANTAS");
-            System.out.println("3) AMORTIGUADORES");
+                System.out.println("1) ALIMENTO PERECIBLE");
+            System.out.println("2) ALIMENTO NO PERECIBLE");
             var opc1=scanner.nextInt();
             scanner.nextLine();
             System.out.println("INGRESE EL NOMBRE DE LA MARCA");
@@ -86,27 +86,21 @@ public class Main {
             scanner.nextLine();
             switch (opc1){
                 case 1->{
-                    System.out.println("INGRESE LA CATEGORIA DISCO/TAMBOR");
-                    var cat=scanner.nextLine();
-                    System.out.println("INGRESE EL MATERIAL PRINCIPAL");
-                    var material=scanner.nextLine();
-                    var producto=new Freno(marca,precio,cantidad,cat,material);
-                    inventario.agragarproducto(producto);
+                    System.out.println("INGRESE LEL TIEMPO DE DIAS UTILES DE CONSUMO (DIAS)");
+                    var dias=scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("INGRESE LA FECHA DE VENCIMIENTO");
+                    var vencimiento=scanner.nextLine();
+                    var producto1=new Perecible(marca,precio,cantidad,"","",dias,vencimiento);
+                    inventario.agragarproducto(producto1);
                 }
                 case 2->{
-                    System.out.println("INGRESE EL RIN DE LA LLANTA");
-                    var rin=scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("INGRESE EL TIPO DE LABRADO LLANTA 4X4 /LISAS");
+                    System.out.println("INGRESE EL PORCENTAJE DE PRESERVANTES (%) ");
+                    var porcentajeP=scanner.nextLine();
+                    System.out.println("INGRESE EL TIPO DE ALMACENAMIENTO");
                     var tipo=scanner.nextLine();
-                    var producto=new Llanta(marca,precio,cantidad,rin,tipo);
+                    var producto=new NoPerecible(marca,precio,cantidad,"","",porcentajeP,tipo);
                     inventario.agragarproducto(producto);
-                }
-                case 3->{
-                    System.out.println("INGRESE EL PESO SOPORTADO en KG");
-                    var peso=scanner.nextInt();
-                    var amortiguadir=new Amortiguador(marca,precio,cantidad,peso);
-                    inventario.agragarproducto(amortiguadir);
                 }
             }
         }
@@ -125,7 +119,7 @@ public class Main {
             System.out.println("INGRESE LA CANTIDAD");
             var cantidad=scanner.nextInt();
             scanner.nextLine();
-            System.out.println("INGRESE LA FECHA  DD/MM/AA");
+            System.out.println("INGRESE LA FECHA  DD/MM/AA DE REABASTECIEMITNO");
             var fecha=scanner.nextLine();
             inventario.reabastecerProducto(nombreP,cantidad,fecha);
         }
@@ -142,7 +136,10 @@ public class Main {
             var nombreP=scanner.nextLine();
             System.out.println("INGRESE LA CANTIDAD");
             var cantidad=scanner.nextInt();
-            inventario.despacho(nombreP,cantidad);
+            scanner.nextLine();
+            System.out.println("INGRESE LA FECHA");
+            var fechaDeCompra=scanner.nextLine();
+            inventario.despacho(nombreP,cantidad,fechaDeCompra);
         }
 
     }
