@@ -10,12 +10,14 @@ public class Producto {
     private double precio;
     private int cantidad;
     private String fechasReabastecimiento;
+    private String fechaDeEntrega;
 
     public Producto(String nombre, double precio, int cantidad) {
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
         this.fechasReabastecimiento = "";
+        this.fechaDeEntrega = "";
     }
 
     public String getNombre() {
@@ -48,6 +50,14 @@ public class Producto {
 
     public void setFechasReabastecimiento(String fechasReabastecimiento) {
         this.fechasReabastecimiento = fechasReabastecimiento;
+    }
+
+    public String getFechaDeEntrega() {
+        return fechaDeEntrega;
+    }
+
+    public void setFechaDeEntrega(String fechaDeEntrega) {
+        this.fechaDeEntrega = fechaDeEntrega;
     }
 
     public  void descripcion(){

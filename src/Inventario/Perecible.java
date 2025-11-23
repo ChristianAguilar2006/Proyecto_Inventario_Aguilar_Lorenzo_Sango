@@ -1,33 +1,33 @@
 package Inventario;
 
-public class Llanta extends Producto{
+public class Perecible extends Producto{
 
-    private int rin;
-    private String labrado;
+    private int diaUtilDias;
+    private String fechaDeVencieminto;
 
-    public Llanta(String nombre, double precio, int cantidad, int rin, String labrado) {
+    public Perecible(String nombre, double precio, int cantidad, String fechasReabastecimiento, String fechaDeEntrega, int diaUtilDias, String fechaDeVencieminto) {
         super(nombre, precio, cantidad);
-        this.rin = rin;
-        this.labrado = labrado;
+        this.diaUtilDias = diaUtilDias;
+        this.fechaDeVencieminto = fechaDeVencieminto;
     }
 
-    public int getRin() {
-        return rin;
+    public int getDiaUtilDias() {
+        return diaUtilDias;
     }
 
-    public void setRin(int rin) {
-        this.rin = rin;
+    public void setDiaUtilDias(int diaUtilDias) {
+        this.diaUtilDias = diaUtilDias;
     }
 
-    public String getLabrado() {
-        return labrado;
+    public String getFechaDeVencieminto() {
+        return fechaDeVencieminto;
     }
 
-    public void setLabrado(String labrado) {
-        this.labrado = labrado;
+    public void setFechaDeVencieminto(String fechaDeVencieminto) {
+        this.fechaDeVencieminto = fechaDeVencieminto;
     }
 
     public void descripcion(){
-        System.out.println("NOMBRE: "+this.getNombre()+" PRECIO: "+this.getPrecio()+" CANTIDAD: "+this.getCantidad()+" CATEGORIA: "+this.rin+" TIPO: "+this.labrado);
+        System.out.println("NOMBRE: "+this.getNombre()+"| PRECIO: "+this.getPrecio()+"| CANTIDAD: "+this.getCantidad()+"| DIAS UTILES: "+this.diaUtilDias+"| FECHA DE CADUCIDAD: "+this.fechaDeVencieminto+"| ULTIMA FECHA QUE FUE ENTREGADO: "+this.getFechaDeEntrega());
     }
 }

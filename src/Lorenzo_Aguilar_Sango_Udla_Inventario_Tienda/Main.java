@@ -1,4 +1,4 @@
-package Lorenzo_Aguilar_Sango_Udla_Inventario_Mecanico;
+package Lorenzo_Aguilar_Sango_Udla_Inventario_Tienda;
 import Inventario.Inventario;
 import Inventario.NoPerecible;
 import Inventario.Perecible;

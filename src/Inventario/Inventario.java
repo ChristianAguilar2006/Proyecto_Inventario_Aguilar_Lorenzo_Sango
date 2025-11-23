@@ -1,14 +1,14 @@
 package Inventario;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Inventario  {
 
     private List<Producto>productos;
-    private double presupuestoInicial;
+    private double presupuesto;
+    private double valorVendido;
 
 
     public Inventario() {
@@ -23,27 +23,27 @@ public class Inventario  {
         this.productos = productos;
     }
 
-    public double getPresupuestoInicial() {
-        return presupuestoInicial;
+    public double getPresupuesto() {
+        return presupuesto;
     }
 
-    public void setPresupuestoInicial(double presupuestoInicial) {
-        this.presupuestoInicial = presupuestoInicial;
+    public void setPresupuesto(double presupuesto) {
+        this.presupuesto = presupuesto;
     }
 
 
     public void agragarproducto(Producto producto) {
-        if (producto.getPrecio() * producto.getCantidad() > presupuestoInicial) {
+        if (producto.getPrecio() * producto.getCantidad() > presupuesto) {
             System.out.println("NO TIENE PRESUPUESTO PARA AGREGAR LA CANTIDAD DE ESTE PRODUCTO");
 
         } else {
             productos.add(producto);
-            this.presupuestoInicial=this.presupuestoInicial-(producto.getCantidad()*producto.getPrecio());
+            this.presupuesto =this.presupuesto -(producto.getCantidad()*producto.getPrecio());
         }
     }
 
     public void verProductos(){
-        System.out.println("PRESUPUESTO: "+this.presupuestoInicial);
+        System.out.println("PRESUPUESTO: "+this.presupuesto);
         for(Producto producto:productos){
             producto.descripcion();
         }
@@ -53,13 +53,13 @@ public class Inventario  {
 
       for (Producto producto:productos){
             if (producto.getNombre().equalsIgnoreCase(nombreP)){
-                if ((cantidad*producto.getPrecio())>this.presupuestoInicial){
+                if ((cantidad*producto.getPrecio())>this.presupuesto){
                     System.out.println("PRESUPUESTO NO ALCANZADO");
                     return;
                 }
                 System.out.println("PRODUCTO REABASTECIDO");
                 producto.reabastecer(cantidad,fecha);
-                this.presupuestoInicial=this.presupuestoInicial-(cantidad*producto.getPrecio());
+                this.presupuesto =this.presupuesto -(cantidad*producto.getPrecio());
 
             }
         }
@@ -85,7 +85,7 @@ public class Inventario  {
                 double costoNuevo = nuevaCantidad * nuevoPrecio;
                 double diferencia = costoNuevo - costoAnterior;
 
-                if (diferencia > presupuestoInicial){
+                if (diferencia > presupuesto){
                     System.out.println("NO TIENE PRESUPUESTO");
                     return;
                 }
@@ -93,7 +93,7 @@ public class Inventario  {
                 p.setNombre(nuevoNombre);
                 p.setCantidad(nuevaCantidad);
                 p.setPrecio(nuevoPrecio);
-                presupuestoInicial -= diferencia;
+                presupuesto -= diferencia;
 
                 System.out.println("EDITADO");
                 System.out.println("****");
@@ -122,7 +122,7 @@ public class Inventario  {
         }
     }
 
-    public void despacho(String nombre,int cantidad){
+    public void despacho(String nombre,int cantidad, String fecha){
 
         for (Producto producto:productos){
             if (producto.getNombre().equalsIgnoreCase(nombre)){
@@ -131,6 +131,9 @@ public class Inventario  {
                     return;
                 }
                 producto.despacharProdcutos(cantidad);
+                producto.setFechaDeEntrega(fecha);
+                this.presupuesto+=cantidad*producto.getPrecio();
+
                 System.out.println("PRODUCTO DESPACHADO");
             }
         }

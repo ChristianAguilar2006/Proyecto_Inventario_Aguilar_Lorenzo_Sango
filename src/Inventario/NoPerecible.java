@@ -1,34 +1,35 @@
 package Inventario;
 
-public class Freno extends Producto {
-    private String categoria;
-    private String material;
+public class NoPerecible extends Producto {
 
-    public Freno(String nombre, double precio, int cantidad, String categoria, String material) {
+    private String porcentajeDePreservantes;
+    private String tipoDeAlmacenamiento;
+
+    public NoPerecible(String nombre, double precio, int cantidad, String fechasReabastecimiento, String fechaDeEntrega, String porcentajeDePreservantes, String tipoDeAlmacenamiento) {
         super(nombre, precio, cantidad);
-        this.categoria = categoria;
-        this.material = material;
+        this.porcentajeDePreservantes = "";
+        this.tipoDeAlmacenamiento = "";
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getPorcentajeDePreservantes() {
+        return porcentajeDePreservantes;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setPorcentajeDePreservantes(String porcentajeDePreservantes) {
+        this.porcentajeDePreservantes = porcentajeDePreservantes;
     }
 
-    public String getMaterial() {
-        return material;
+    public String getTipoDeAlmacenamiento() {
+        return tipoDeAlmacenamiento;
     }
 
-    public void setMaterial(String material) {
-        this.material = material;
+    public void setTipoDeAlmacenamiento(String tipoDeAlmacenamiento) {
+        this.tipoDeAlmacenamiento = tipoDeAlmacenamiento;
     }
 
     public void descripcion(){
-        System.out.println("NOMBRE: "+this.getNombre()+" PRECIO: "+this.getPrecio()+" CANTIDAD: "+this.getCantidad()+" CATEGORIA: "+this.categoria+" MATERIAL: "+this.material);
-    }
+        System.out.println("NOMBRE: "+this.getNombre()+"| PRECIO: "+this.getPrecio()+"| CANTIDAD: "+this.getCantidad()+"| CANTIDAD DE PRESERVANTES (%): "+this.porcentajeDePreservantes+"| TIPO DE ALMACENAMIENTO: "+this.tipoDeAlmacenamiento);
+ }
 
 
 }
